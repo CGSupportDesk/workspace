@@ -1,0 +1,716 @@
+{
+  "capturedAt": "2026-05-20T14:01:58.420Z",
+  "source": "https://finovate.vamtam.com/",
+  "screenshots": [
+    "qa/finovate-root/desktop-full.png",
+    "qa/finovate-root/desktop-above-fold.png",
+    "qa/finovate-root/mobile-above-fold.png"
+  ],
+  "study": {
+    "title": "Finovate – Financial Consulting + Risk Management",
+    "url": "https://finovate.vamtam.com/",
+    "bodyFont": "\"Work Sans\", sans-serif",
+    "bodyBg": "rgba(0, 0, 0, 0)",
+    "nav": [
+      "Home",
+      "Services",
+      "About",
+      "Insights",
+      "Testimonial",
+      "Contact",
+      "Services",
+      "Who we are",
+      "Insights",
+      "Careers",
+      "Team",
+      "Contact Us",
+      "FAQ",
+      "Terms & Conditions",
+      "Privacy Policy"
+    ],
+    "buttons": [
+      "Home",
+      "Close Home Open Home",
+      "Services",
+      "Close Services Open Services",
+      "About",
+      "Close About Open About",
+      "Insights",
+      "Testimonial",
+      "Contact",
+      "Let’s get started",
+      "Schedule a Call",
+      "Learn more",
+      "Learn More",
+      "Our Philosophy",
+      "01",
+      "02",
+      "03",
+      "Learn more",
+      "Financial Planing",
+      "Investment Management",
+      "Insurance & Risk Management",
+      "Alternative Investments",
+      "Schedule a Call",
+      "Careers",
+      "View All",
+      "John Smith Vice President",
+      "Klara Berger Senior Advisor Associate",
+      "Rebbeka Hof Vice President",
+      "Donald Ferreira Managing Director",
+      "Free Consultation",
+      "Read All Testimonials",
+      "4.9 Google reviews",
+      "More Insights",
+      "Financing Use Physician Lifecycle Planning to Maximize Your Financial Potential",
+      "Diversity, Equity, and Inclusion Report",
+      "Advise How to Overcome the Impact of Inflation",
+      "Learn More",
+      "Subscribe",
+      "Free Consultation",
+      "+1(122)800 88 08",
+      "office@finovate.com",
+      "San Francisco, 1140 Harrison St, CA 94103",
+      "Services",
+      "Who we are",
+      "Insights",
+      "Careers",
+      "Team",
+      "Contact Us",
+      "FAQ",
+      "© 2026 VamTam. All Rights Reserved",
+      "Terms & Conditions",
+      "Privacy Policy",
+      "X-twitter",
+      "Linkedin",
+      "Facebook",
+      "Instagram"
+    ],
+    "headings": [
+      {
+        "tag": "h1",
+        "text": "Investing For Tomorrow, Together",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "58px",
+        "weight": "500",
+        "lineHeight": "58px"
+      },
+      {
+        "tag": "h3",
+        "text": "Assets",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "30px",
+        "weight": "500",
+        "lineHeight": "36px"
+      },
+      {
+        "tag": "h3",
+        "text": "$28.90M",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "30px",
+        "weight": "500",
+        "lineHeight": "36px"
+      },
+      {
+        "tag": "h3",
+        "text": "120+",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "30px",
+        "weight": "500",
+        "lineHeight": "36px"
+      },
+      {
+        "tag": "h3",
+        "text": "2016",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "30px",
+        "weight": "500",
+        "lineHeight": "36px"
+      },
+      {
+        "tag": "h2",
+        "text": "Founded by Industry Trailblazers who Continue to Lead the Way.",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Covering the Full Spectrum of Global Financial Services",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "We Listen, Think Independently, Advise & Take Action",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "You’ll Know What",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Choosing The Right Financial Planning Team",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h3",
+        "text": "SEC Registered Investment Advisor",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "30px",
+        "weight": "500",
+        "lineHeight": "36px"
+      },
+      {
+        "tag": "h2",
+        "text": "Client Experiences That Speak for Themselves",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Hear Directly From Finovate Experts",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Financial Planing FAQ’s",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Latest News & Resources",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Ready to Take Control of your Finances?",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      }
+    ],
+    "colors": [
+      {
+        "value": "rgba(0, 0, 0, 0.8)",
+        "count": 536
+      },
+      {
+        "value": "rgb(28, 75, 66)",
+        "count": 343
+      },
+      {
+        "value": "rgb(255, 255, 255)",
+        "count": 44
+      },
+      {
+        "value": "rgb(105, 114, 125)",
+        "count": 29
+      },
+      {
+        "value": "rgb(180, 231, 23)",
+        "count": 11
+      },
+      {
+        "value": "rgb(126, 126, 126)",
+        "count": 9
+      },
+      {
+        "value": "rgb(146, 194, 0)",
+        "count": 7
+      },
+      {
+        "value": "rgb(246, 245, 242)",
+        "count": 4
+      }
+    ],
+    "backgrounds": [
+      {
+        "value": "rgb(246, 245, 242)",
+        "count": 37
+      },
+      {
+        "value": "rgb(28, 75, 66)",
+        "count": 20
+      },
+      {
+        "value": "rgb(255, 255, 255)",
+        "count": 19
+      },
+      {
+        "value": "rgb(180, 231, 23)",
+        "count": 11
+      },
+      {
+        "value": "rgba(255, 255, 255, 0.8)",
+        "count": 5
+      },
+      {
+        "value": "rgba(255, 255, 255, 0)",
+        "count": 4
+      }
+    ],
+    "fonts": [
+      {
+        "value": "\"Work Sans\", sans-serif",
+        "count": 940
+      },
+      {
+        "value": "theme-icons",
+        "count": 43
+      }
+    ],
+    "radii": [
+      {
+        "value": "100px",
+        "count": 28
+      },
+      {
+        "value": "24px",
+        "count": 28
+      },
+      {
+        "value": "50%",
+        "count": 24
+      },
+      {
+        "value": "16px",
+        "count": 20
+      },
+      {
+        "value": "30px",
+        "count": 6
+      },
+      {
+        "value": "20px",
+        "count": 4
+      },
+      {
+        "value": "200px",
+        "count": 4
+      },
+      {
+        "value": "0px 0px 24px 24px",
+        "count": 2
+      },
+      {
+        "value": "8px",
+        "count": 1
+      }
+    ],
+    "gradients": [
+      "linear-gradient(rgb(246, 245, 242) 0%, rgb(255, 255, 255) 100%)",
+      "linear-gradient(rgb(246, 245, 242) 50%, rgb(255, 255, 255) 100%)"
+    ],
+    "cssVars": [
+      {
+        "key": "--wp--preset--font-size--large",
+        "value": "36px"
+      },
+      {
+        "key": "--wp--preset--color--vivid-cyan-blue",
+        "value": "#0693e3"
+      },
+      {
+        "key": "--wp--preset--color--vivid-purple",
+        "value": "#9b51e0"
+      },
+      {
+        "key": "--wp--preset--color--pale-cyan-blue",
+        "value": "#8ed1fc"
+      },
+      {
+        "key": "--wp--preset--font-size--small",
+        "value": "13px"
+      },
+      {
+        "key": "--wp--preset--color--pale-pink",
+        "value": "#f78da7"
+      },
+      {
+        "key": "--wp--preset--color--cyan-bluish-gray",
+        "value": "#abb8c3"
+      },
+      {
+        "key": "--wp--preset--color--luminous-vivid-amber",
+        "value": "#fcb900"
+      },
+      {
+        "key": "--wp--preset--color--vivid-red",
+        "value": "#cf2e2e"
+      },
+      {
+        "key": "--wp--preset--color--vivid-green-cyan",
+        "value": "#00d084"
+      },
+      {
+        "key": "--wp--preset--color--light-green-cyan",
+        "value": "#7bdcb5"
+      },
+      {
+        "key": "--wp--preset--color--white",
+        "value": "#ffffff"
+      },
+      {
+        "key": "--wp--preset--font-size--medium",
+        "value": "20px"
+      },
+      {
+        "key": "--wp--preset--color--black",
+        "value": "#000000"
+      },
+      {
+        "key": "--wp--preset--color--luminous-vivid-orange",
+        "value": "#ff6900"
+      },
+      {
+        "key": "--wp--preset--font-size--x-large",
+        "value": "42px"
+      },
+      {
+        "key": "--swiper-theme-color",
+        "value": "#007aff"
+      }
+    ],
+    "sectionTexts": [
+      "Home Close Home Open Home Finance Investment Consulting Company Finance Investment Consulting Company Services Close Services Open Services Financial Planing Investment Management Insurance & Risk Management Alternative ",
+      "Home Close Home Open Home Finance Investment Consulting Company Finance Investment Consulting Company Services Close Services Open Services Financial Planing Investment Management Insurance & Risk Management Alternative ",
+      "Investing For Tomorrow, Together Let’s get started Schedule a Call",
+      "Investing For Tomorrow, Together Let’s get started Schedule a Call",
+      "Investing For Tomorrow, Together",
+      "Let’s get started",
+      "Schedule a Call",
+      "Assets Learn more Assets under management $28.90M Professionals 120+ Earning client trust since 2016 Who we are Founded by Industry Trailblazers who Continue to Lead the Way. Learn More Our Philosophy 01 02 03 We’re a st",
+      "Assets Learn more Assets under management $28.90M Professionals 120+ Earning client trust since 2016",
+      "Assets Learn more Assets under management $28.90M",
+      "Assets Learn more",
+      "Assets",
+      "Learn more",
+      "Assets under management $28.90M",
+      "Assets under management $28.90M",
+      "Assets under management",
+      "$28.90M",
+      "Professionals 120+",
+      "Professionals 120+",
+      "Professionals 120+"
+    ],
+    "images": [
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/logo.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mart-production-7222858.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mart-production-7222858-150x150.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mikhail-nilov-7677869.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mikhail-nilov-7677869-150x150.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-karolina-grabowska-7681192.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-karolina-grabowska-7681192-150x150.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/cpa-k-350-thumbnail.png",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-thisisengineering-3861962-1-150x150.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-thisisengineering-3861962-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-divinetechygirl-1181391-1-150x150.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-divinetechygirl-1181391-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-shazardr-14156490-1-150x150.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-shazardr-14156490-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/hex.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/MTgox.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/savex.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/coinbase.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/konstruktion.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/meta.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2184924844.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-150x150.png",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-300x300.png",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2041846314.jpg",
+      "https://finovate.vamtam.com/wp-content/plugins/elementor/assets/mask-shapes/circle.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1848411099.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1887449071.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-sevice-1-1.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2180893170.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-sevice-2.2.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1218283950.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-sevice-3.2.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1294412622-1jpg.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/mask-sevice-4.2.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1364057915.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1824276392.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2162109308.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/blog-path-mask.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/Piled-Up-Books-Mockup.png",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1502868925.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2163451178.jpg"
+    ]
+  },
+  "downloadedImages": [
+    {
+      "file": "images/01-logo-89b2d6c4.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/logo.svg",
+      "bytes": 9881,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/02-pexels-mart-production-7222858-3f71ca60.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mart-production-7222858.jpg",
+      "bytes": 2988,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/03-pexels-mart-production-7222858-150x150-b9892965.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mart-production-7222858-150x150.jpg",
+      "bytes": 1974,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/04-pexels-mikhail-nilov-7677869-0887b01e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mikhail-nilov-7677869.jpg",
+      "bytes": 3240,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/05-pexels-mikhail-nilov-7677869-150x150-55ef701a.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-mikhail-nilov-7677869-150x150.jpg",
+      "bytes": 2082,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/06-pexels-karolina-grabowska-7681192-c55ab0ab.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-karolina-grabowska-7681192.jpg",
+      "bytes": 6026,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/07-pexels-karolina-grabowska-7681192-150x150-ba723f4d.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-karolina-grabowska-7681192-150x150.jpg",
+      "bytes": 3726,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/08-cpa-k-350-thumbnail-4573d0e5.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/cpa-k-350-thumbnail.png",
+      "bytes": 2634,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/09-pexels-thisisengineering-3861962-1-150x150-8a77ab6d.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-thisisengineering-3861962-1-150x150.jpg",
+      "bytes": 2698,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/10-pexels-thisisengineering-3861962-1-267e5455.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-thisisengineering-3861962-1.jpg",
+      "bytes": 6206,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/11-pexels-divinetechygirl-1181391-1-150x150-2795612b.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-divinetechygirl-1181391-1-150x150.jpg",
+      "bytes": 2292,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/12-pexels-divinetechygirl-1181391-1-ccfb5ed2.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-divinetechygirl-1181391-1.jpg",
+      "bytes": 5482,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/13-pexels-shazardr-14156490-1-150x150-552ad67e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-shazardr-14156490-1-150x150.jpg",
+      "bytes": 2378,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/14-pexels-shazardr-14156490-1-4c52d97e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-shazardr-14156490-1.jpg",
+      "bytes": 5068,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/15-hex-2f056940.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/hex.svg",
+      "bytes": 5301,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/16-MTgox-5aa9a44f.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/MTgox.svg",
+      "bytes": 3053,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/17-savex-6da01b7d.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/savex.svg",
+      "bytes": 3320,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/18-coinbase-b9d40600.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/coinbase.svg",
+      "bytes": 4670,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/19-konstruktion-3071516d.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/konstruktion.svg",
+      "bytes": 3843,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/20-meta-377aa782.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/meta.svg",
+      "bytes": 3741,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/21-GettyImages-2184924844-a8780068.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2184924844.jpg",
+      "bytes": 93458,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/22-fav-icon-150x150-c4d9619e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-150x150.png",
+      "bytes": 4096,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/23-fav-icon-300x300-236fbefb.png",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-300x300.png",
+      "bytes": 12578,
+      "contentType": "image/png"
+    },
+    {
+      "file": "images/24-GettyImages-2041846314-6fbefa66.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2041846314.jpg",
+      "bytes": 10110,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/25-circle-c9a74104.svg",
+      "source": "https://finovate.vamtam.com/wp-content/plugins/elementor/assets/mask-shapes/circle.svg",
+      "bytes": 100,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/26-GettyImages-1848411099-a8a8a589.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1848411099.jpg",
+      "bytes": 19352,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/27-GettyImages-1887449071-89a82eb0.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1887449071.jpg",
+      "bytes": 25070,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/28-mask-sevice-1-1-719b52db.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-sevice-1-1.svg",
+      "bytes": 298,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/29-GettyImages-2180893170-d6657911.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2180893170.jpg",
+      "bytes": 28026,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/30-mask-sevice-2-2-b0ca531c.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-sevice-2.2.svg",
+      "bytes": 2605,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/31-GettyImages-1218283950-7522b01e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1218283950.jpg",
+      "bytes": 61564,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/32-mask-sevice-3-2-e8b04595.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-sevice-3.2.svg",
+      "bytes": 699,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/33-GettyImages-1294412622-1jpg-3fe9c57f.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1294412622-1jpg.jpg",
+      "bytes": 22622,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/34-mask-sevice-4-2-8b7bb76c.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/mask-sevice-4.2.svg",
+      "bytes": 725,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/35-GettyImages-1364057915-ed1c15eb.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1364057915.jpg",
+      "bytes": 115686,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/36-GettyImages-1824276392-148538d4.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1824276392.jpg",
+      "bytes": 86564,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/37-GettyImages-2162109308-3f385f13.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2162109308.jpg",
+      "bytes": 112688,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/38-blog-path-mask-97203162.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/blog-path-mask.svg",
+      "bytes": 842,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/39-Piled-Up-Books-Mockup-17e5a4cc.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/Piled-Up-Books-Mockup.png",
+      "bytes": 740456,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/40-GettyImages-1502868925-0eb08f21.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1502868925.jpg",
+      "bytes": 119174,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/41-GettyImages-2163451178-cd059ca6.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2163451178.jpg",
+      "bytes": 52352,
+      "contentType": "image/webp"
+    }
+  ],
+  "consoleErrors": []
+}

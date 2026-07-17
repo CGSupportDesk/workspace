@@ -1,0 +1,7 @@
+.vercel
+.env
+.env.local
+.env.production.local
+.deployment-secrets
+
+.env*

@@ -1,0 +1,125 @@
+import { neon, type NeonQueryFunction } from '@neondatabase/serverless'
+import { hash } from 'bcryptjs'
+
+type Row = Record<string, unknown>
+
+let client: NeonQueryFunction<false, false> | null = null
+let migration: Promise<void> | null = null
+
+export function sqlClient() {
+  if (client) return client
+  const connection = process.env.DATABASE_URL || process.env.POSTGRES_URL
+  if (!connection) throw new Error('DATABASE_URL is not configured.')
+  client = neon(connection)
+  return client
+}
+
+export async function query<T extends Row = Row>(text: string, params: unknown[] = []): Promise<T[]> {
+  return await sqlClient().query(text, params) as T[]
+}
+
+export async function ensureDatabase() {
+  if (migration) return migration
+  migration = migrate()
+  return migration
+}
+
+async function migrate() {
+  const sql = sqlClient()
+  await sql`CREATE TABLE IF NOT EXISTS workspace_users (
+    id UUID PRIMARY KEY,
+    username TEXT NOT NULL,
+    email TEXT NOT NULL,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL CHECK (role IN ('admin', 'member')),
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    session_version INTEGER NOT NULL DEFAULT 1,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE UNIQUE INDEX IF NOT EXISTS workspace_users_username_lower ON workspace_users (LOWER(username))`
+  await sql`CREATE UNIQUE INDEX IF NOT EXISTS workspace_users_email_lower ON workspace_users (LOWER(email))`
+  await sql`CREATE TABLE IF NOT EXISTS vault_folders (
+    id UUID PRIMARY KEY,
+    name TEXT NOT NULL,
+    parent_id UUID NULL REFERENCES vault_folders(id) ON DELETE RESTRICT,
+    owner_id UUID NOT NULL REFERENCES workspace_users(id) ON DELETE RESTRICT,
+    visibility TEXT NOT NULL CHECK (visibility IN ('private', 'workspace', 'restricted')),
+    favourite BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS vault_documents (
+    id UUID PRIMARY KEY,
+    name TEXT NOT NULL,
+    file_type TEXT NOT NULL,
+    file_size BIGINT NOT NULL,
+    storage_path TEXT NOT NULL,
+    folder_id UUID NULL REFERENCES vault_folders(id) ON DELETE RESTRICT,
+    category TEXT NOT NULL,
+    owner_id UUID NOT NULL REFERENCES workspace_users(id) ON DELETE RESTRICT,
+    visibility TEXT NOT NULL CHECK (visibility IN ('private', 'workspace', 'restricted')),
+    favourite BOOLEAN NOT NULL DEFAULT FALSE,
+    version INTEGER NOT NULL DEFAULT 1,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS vault_document_versions (
+    id UUID PRIMARY KEY,
+    document_id UUID NOT NULL REFERENCES vault_documents(id) ON DELETE CASCADE,
+    version INTEGER NOT NULL,
+    storage_path TEXT NOT NULL,
+    file_size BIGINT NOT NULL,
+    created_by UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE(document_id, version)
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS workspace_activity (
+    id UUID PRIMARY KEY,
+    actor_id UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
+    action TEXT NOT NULL,
+    entity_type TEXT NOT NULL,
+    entity_id UUID NULL,
+    entity_name TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS workspace_login_attempts (
+    id BIGSERIAL PRIMARY KEY,
+    ip TEXT NOT NULL,
+    success BOOLEAN NOT NULL DEFAULT FALSE,
+    attempted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE INDEX IF NOT EXISTS vault_documents_owner_idx ON vault_documents(owner_id)`
+  await sql`CREATE INDEX IF NOT EXISTS vault_documents_folder_idx ON vault_documents(folder_id)`
+  await sql`CREATE INDEX IF NOT EXISTS vault_documents_updated_idx ON vault_documents(updated_at DESC)`
+  await sql`CREATE INDEX IF NOT EXISTS vault_folders_owner_idx ON vault_folders(owner_id)`
+  await sql`CREATE INDEX IF NOT EXISTS workspace_activity_created_idx ON workspace_activity(created_at DESC)`
+
+  const admins = await query<{ count: string }>("SELECT COUNT(*)::text count FROM workspace_users WHERE role = 'admin'")
+  if (Number(admins[0]?.count || 0) === 0) {
+    const username = process.env.WORKSPACE_ADMIN_USERNAME?.trim() || ''
+    const email = process.env.WORKSPACE_ADMIN_EMAIL?.trim().toLowerCase() || ''
+    const password = process.env.WORKSPACE_ADMIN_PASSWORD || ''
+    if (!username || !email.includes('@') || !strongPassword(password)) {
+      throw new Error('Workspace admin bootstrap variables are missing or invalid.')
+    }
+    await query(
+      `INSERT INTO workspace_users (id, username, email, password_hash, role)
+       VALUES ($1, $2, $3, $4, 'admin') ON CONFLICT DO NOTHING`,
+      [crypto.randomUUID(), username, email, await hash(password, 12)],
+    )
+  }
+}
+
+export function strongPassword(password: string) {
+  return password.length >= 10 && /[a-z]/.test(password) && /[A-Z]/.test(password) && /\d/.test(password)
+}
+
+export async function logActivity(userId: string, action: string, entityType: string, entityId: string | null, entityName: string) {
+  await query(
+    `INSERT INTO workspace_activity (id, actor_id, action, entity_type, entity_id, entity_name)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [crypto.randomUUID(), userId, action, entityType, entityId, entityName],
+  )
+}
+

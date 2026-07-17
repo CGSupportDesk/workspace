@@ -1,0 +1,23 @@
+.env
+workspace-shell/.env
+workspace-shell/node_modules/
+workspace-shell/dist/
+workspace-shell/api/database/*.sqlite
+workspace-shell/api/database/*.sqlite-*
+workspace-shell/api/storage/*
+!workspace-shell/api/storage/.gitkeep
+!workspace-shell/api/storage/.htaccess
+workspace-shell/legacy-php-api/database/*.sqlite
+workspace-shell/legacy-php-api/database/*.sqlite-*
+workspace-shell/legacy-php-api/storage/*
+!workspace-shell/legacy-php-api/storage/.gitkeep
+!workspace-shell/legacy-php-api/storage/.htaccess
+Finora/api/database/*.db
+Finora/api/database/*.db-*
+todo (2)/api/database/*.db
+todo (2)/api/database/*.db-*
+*.log
+.DS_Store
+.vercel-token
+workspace-shell/.deployment-secrets
+workspace-shell/.vercel/

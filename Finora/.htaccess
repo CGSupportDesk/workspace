@@ -1,0 +1,27 @@
+# Finora — Block direct access to the database folder
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^api/database/ - [F,L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Block .db / .sqlite / .sqlite3 files from being served
+<FilesMatch "\.(db|sqlite|sqlite3|log)$">
+  Require all denied
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "DENY"
+  Header set Referrer-Policy "same-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Force HTTPS (uncomment after confirming SSL is working on Hostinger)
+# <IfModule mod_rewrite.c>
+#   RewriteCond %{HTTPS} !=on
+#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>

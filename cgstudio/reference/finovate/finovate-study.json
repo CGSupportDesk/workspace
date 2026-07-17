@@ -1,0 +1,617 @@
+{
+  "capturedAt": "2026-05-20T13:59:13.367Z",
+  "source": "https://themes.vamtam.com/?theme=finovate&n=2",
+  "demoUrl": "https://finovate.vamtam.com/consulting-company/",
+  "screenshots": [
+    "qa/finovate/desktop-full.png",
+    "qa/finovate/desktop-above-fold.png",
+    "qa/finovate/mobile-above-fold.png"
+  ],
+  "study": {
+    "title": "Consulting Company – Finovate",
+    "url": "https://finovate.vamtam.com/consulting-company/",
+    "bodyFont": "\"Work Sans\", sans-serif",
+    "bodyBg": "rgba(0, 0, 0, 0)",
+    "nav": [
+      "Home",
+      "Services",
+      "Industries",
+      "About",
+      "Insights",
+      "Contact Us",
+      "Automotive",
+      "Defense, Security & Justice",
+      "Energy & Chemicals",
+      "Health Care",
+      "Investment Management",
+      "Telecommunications",
+      "Consulting",
+      "Audit & Assurance",
+      "Risk & Financial Advisory",
+      "AI & Analytics",
+      "M&A & Restructuring",
+      "Tax",
+      "Our philosophy",
+      "Insights"
+    ],
+    "buttons": [
+      "Home",
+      "Close Home Open Home",
+      "Services",
+      "Close Services Open Services",
+      "Industries",
+      "Close Industries Open Industries",
+      "About",
+      "Close About Open About",
+      "Insights",
+      "Contact Us",
+      "Trusted Partner",
+      "Financial Services",
+      "Investing",
+      "Free Consultation",
+      "Who we are Leading Provider of Analytics and Financial Services",
+      "Recognition Finovate Consulting Named a Agentforce Partner",
+      "Report 2024 Diversity, Equity, and Inclusion Report",
+      "Consulting",
+      "Audit & Assurance",
+      "Risk & Financial",
+      "AI & Analytics",
+      "View All Services",
+      "Set an Appointment",
+      "Automotive",
+      "Defense, Security & Justice",
+      "Energy & Chemicals",
+      "Health Care",
+      "Investment Management",
+      "Telecommunications",
+      "Discover More",
+      "Read Full Story",
+      "Read Full Story",
+      "Read Full Story",
+      "Read Full Story",
+      "Financing The Scaling Blueprint: Helping Regional Banks Prepare for the Future?",
+      "Healthcare Healthcare Private Equity Market 2024: Year in Review and Outlook",
+      "More Insights",
+      "Schedule a Free Consultation",
+      "(101) 500 0200",
+      "Submit"
+    ],
+    "headings": [
+      {
+        "tag": "h2",
+        "text": "Your Trusted",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "58px",
+        "weight": "500",
+        "lineHeight": "58px"
+      },
+      {
+        "tag": "h1",
+        "text": "Consulting Partner",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "58px",
+        "weight": "500",
+        "lineHeight": "58px"
+      },
+      {
+        "tag": "h2",
+        "text": "We Champion the Bold to Achieve the Extraordinary",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Strategic Interventions that Transform our Clients' Business",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Trajectory",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Our Experience Spans Every Industry and Challenge",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Our Latest Insights",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      },
+      {
+        "tag": "h2",
+        "text": "Let’s Connect",
+        "font": "\"Work Sans\", sans-serif",
+        "size": "48px",
+        "weight": "400",
+        "lineHeight": "57.6px"
+      }
+    ],
+    "colors": [
+      {
+        "value": "rgba(0, 0, 0, 0.8)",
+        "count": 458
+      },
+      {
+        "value": "rgb(28, 75, 66)",
+        "count": 292
+      },
+      {
+        "value": "rgb(0, 0, 0)",
+        "count": 55
+      },
+      {
+        "value": "rgb(255, 255, 255)",
+        "count": 33
+      },
+      {
+        "value": "rgb(246, 245, 242)",
+        "count": 27
+      },
+      {
+        "value": "rgb(180, 231, 23)",
+        "count": 22
+      },
+      {
+        "value": "rgb(126, 126, 126)",
+        "count": 9
+      },
+      {
+        "value": "rgb(146, 194, 0)",
+        "count": 4
+      }
+    ],
+    "backgrounds": [
+      {
+        "value": "rgb(246, 245, 242)",
+        "count": 20
+      },
+      {
+        "value": "rgb(180, 231, 23)",
+        "count": 18
+      },
+      {
+        "value": "rgb(255, 255, 255)",
+        "count": 16
+      },
+      {
+        "value": "rgb(28, 75, 66)",
+        "count": 13
+      },
+      {
+        "value": "rgba(255, 255, 255, 0.2)",
+        "count": 7
+      },
+      {
+        "value": "rgba(255, 255, 255, 0.8)",
+        "count": 6
+      },
+      {
+        "value": "rgba(2, 1, 1, 0)",
+        "count": 6
+      }
+    ],
+    "fonts": [
+      {
+        "value": "\"Work Sans\", sans-serif",
+        "count": 852
+      },
+      {
+        "value": "theme-icons",
+        "count": 48
+      }
+    ],
+    "radii": [
+      {
+        "value": "24px",
+        "count": 35
+      },
+      {
+        "value": "100%",
+        "count": 31
+      },
+      {
+        "value": "50%",
+        "count": 26
+      },
+      {
+        "value": "100px",
+        "count": 16
+      },
+      {
+        "value": "16px",
+        "count": 12
+      },
+      {
+        "value": "24px 0px 0px",
+        "count": 7
+      },
+      {
+        "value": "30px",
+        "count": 5
+      },
+      {
+        "value": "20px",
+        "count": 5
+      },
+      {
+        "value": "8px",
+        "count": 4
+      },
+      {
+        "value": "24px 24px 0px 2px",
+        "count": 3
+      }
+    ],
+    "cssVars": [
+      {
+        "key": "--wp--preset--font-size--large",
+        "value": "36px"
+      },
+      {
+        "key": "--wp--preset--color--vivid-cyan-blue",
+        "value": "#0693e3"
+      },
+      {
+        "key": "--wp--preset--color--vivid-purple",
+        "value": "#9b51e0"
+      },
+      {
+        "key": "--wp--preset--color--pale-cyan-blue",
+        "value": "#8ed1fc"
+      },
+      {
+        "key": "--wp--preset--font-size--small",
+        "value": "13px"
+      },
+      {
+        "key": "--wp--preset--color--pale-pink",
+        "value": "#f78da7"
+      },
+      {
+        "key": "--wp--preset--color--cyan-bluish-gray",
+        "value": "#abb8c3"
+      },
+      {
+        "key": "--wp--preset--color--luminous-vivid-amber",
+        "value": "#fcb900"
+      },
+      {
+        "key": "--wp--preset--color--vivid-red",
+        "value": "#cf2e2e"
+      },
+      {
+        "key": "--wp--preset--color--vivid-green-cyan",
+        "value": "#00d084"
+      },
+      {
+        "key": "--wp--preset--color--light-green-cyan",
+        "value": "#7bdcb5"
+      },
+      {
+        "key": "--wp--preset--color--white",
+        "value": "#ffffff"
+      },
+      {
+        "key": "--wp--preset--font-size--medium",
+        "value": "20px"
+      },
+      {
+        "key": "--wp--preset--color--black",
+        "value": "#000000"
+      },
+      {
+        "key": "--wp--preset--color--luminous-vivid-orange",
+        "value": "#ff6900"
+      },
+      {
+        "key": "--wp--preset--font-size--x-large",
+        "value": "42px"
+      },
+      {
+        "key": "--swiper-theme-color",
+        "value": "#007aff"
+      }
+    ],
+    "images": [
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/logo-1.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/logo.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1441231058-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1441231058-1-300x242.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1474128783-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1474128783-1-300x293.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1387035425.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1387035425-300x242.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2170384534-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2170384534-1-227x300.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2065938875-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2065938875-1-224x300.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1215205229-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1215205229-1-227x300.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/gettyimages-1848417745-1024x1024-1.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/gettyimages-1848417745-1024x1024-1-227x300.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/graph.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/hex.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/MTgox.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/savex.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/konstruktion.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/coinbase.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/03/meta.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-150x150.png",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-300x300.png",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-nav-banner.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1364057902.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1483243663.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2149615639.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/star-mask.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/Triangle.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1394467242.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1360494581.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/box-shape-mask.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1450789100.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-rdne-7821936.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/blog-mask.svg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1313460596.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1498516652.jpg",
+      "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2161896288.jpg"
+    ]
+  },
+  "downloadedImages": [
+    {
+      "file": "images/01-logo-1-755dbba6.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/logo-1.svg",
+      "bytes": 9897,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/02-logo-89b2d6c4.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/logo.svg",
+      "bytes": 9881,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/03-GettyImages-1441231058-1-37e2d543.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1441231058-1.jpg",
+      "bytes": 29170,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/04-GettyImages-1441231058-1-300x242-02f22bbf.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1441231058-1-300x242.jpg",
+      "bytes": 9166,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/05-GettyImages-1474128783-1-a36a4d84.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1474128783-1.jpg",
+      "bytes": 30562,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/06-GettyImages-1474128783-1-300x293-3c075914.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1474128783-1-300x293.jpg",
+      "bytes": 9160,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/07-GettyImages-1387035425-234c8b99.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1387035425.jpg",
+      "bytes": 24946,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/08-GettyImages-1387035425-300x242-2dea9521.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1387035425-300x242.jpg",
+      "bytes": 6780,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/09-GettyImages-2170384534-1-e09ac074.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2170384534-1.jpg",
+      "bytes": 24894,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/10-GettyImages-2170384534-1-227x300-979b4f07.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2170384534-1-227x300.jpg",
+      "bytes": 6650,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/11-GettyImages-2065938875-1-7f494b4e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2065938875-1.jpg",
+      "bytes": 30070,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/12-GettyImages-2065938875-1-224x300-79aa823e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2065938875-1-224x300.jpg",
+      "bytes": 7886,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/13-GettyImages-1215205229-1-785f3939.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1215205229-1.jpg",
+      "bytes": 39738,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/14-GettyImages-1215205229-1-227x300-8add80e1.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1215205229-1-227x300.jpg",
+      "bytes": 10666,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/15-gettyimages-1848417745-1024x1024-1-a9b9e3db.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/gettyimages-1848417745-1024x1024-1.jpg",
+      "bytes": 24136,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/16-gettyimages-1848417745-1024x1024-1-227x300-e0db2e38.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/gettyimages-1848417745-1024x1024-1-227x300.jpg",
+      "bytes": 7094,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/17-graph-e562b782.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/graph.svg",
+      "bytes": 44410,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/18-hex-2f056940.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/hex.svg",
+      "bytes": 5301,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/19-MTgox-5aa9a44f.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/MTgox.svg",
+      "bytes": 3053,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/20-savex-6da01b7d.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/savex.svg",
+      "bytes": 3320,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/21-konstruktion-3071516d.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/konstruktion.svg",
+      "bytes": 3843,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/22-coinbase-b9d40600.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/coinbase.svg",
+      "bytes": 4670,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/23-meta-377aa782.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/03/meta.svg",
+      "bytes": 3741,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/24-fav-icon-150x150-c4d9619e.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-150x150.png",
+      "bytes": 4096,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/25-fav-icon-300x300-236fbefb.png",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/fav-icon-300x300.png",
+      "bytes": 12578,
+      "contentType": "image/png"
+    },
+    {
+      "file": "images/26-mask-nav-banner-d9beca5c.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/mask-nav-banner.svg",
+      "bytes": 1004,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/27-GettyImages-1364057902-1e229e21.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1364057902.jpg",
+      "bytes": 148218,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/28-GettyImages-1483243663-d63e03d4.jpg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1483243663.jpg",
+      "bytes": 381848,
+      "contentType": "image/jpeg"
+    },
+    {
+      "file": "images/29-GettyImages-2149615639-769b94a3.jpg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2149615639.jpg",
+      "bytes": 413782,
+      "contentType": "image/jpeg"
+    },
+    {
+      "file": "images/30-star-mask-bba9e96f.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/star-mask.svg",
+      "bytes": 2551,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/31-Triangle-93fd69c7.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/Triangle.svg",
+      "bytes": 587,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/32-GettyImages-1394467242-3d8aa6ea.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1394467242.jpg",
+      "bytes": 91784,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/33-GettyImages-1360494581-8230185f.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1360494581.jpg",
+      "bytes": 58568,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/34-box-shape-mask-a553dada.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/box-shape-mask.svg",
+      "bytes": 760,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/35-GettyImages-1450789100-e9b0dcf7.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1450789100.jpg",
+      "bytes": 47140,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/36-pexels-rdne-7821936-427b1cbc.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/pexels-rdne-7821936.jpg",
+      "bytes": 92364,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/37-blog-mask-c76283d3.svg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/blog-mask.svg",
+      "bytes": 1001,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "file": "images/38-GettyImages-1313460596-8bdc7ab8.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1313460596.jpg",
+      "bytes": 168428,
+      "contentType": "image/webp"
+    },
+    {
+      "file": "images/39-GettyImages-1498516652-82bfda7c.jpg",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-1498516652.jpg",
+      "bytes": 327316,
+      "contentType": "image/jpeg"
+    },
+    {
+      "file": "images/40-GettyImages-2161896288-d74dbb85.webp",
+      "source": "https://finovate.vamtam.com/wp-content/uploads/2025/02/GettyImages-2161896288.jpg",
+      "bytes": 82958,
+      "contentType": "image/webp"
+    }
+  ],
+  "consoleErrors": []
+}
