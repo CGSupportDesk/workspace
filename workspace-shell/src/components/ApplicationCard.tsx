@@ -1,15 +1,10 @@
-import { useNavigate } from 'react-router-dom'
-import { Icon } from './Icon'
+import { useAppLauncher } from '../hooks/useAppLauncher'
 import type { WorkspaceApplication } from '../types'
+import { Icon } from './Icon'
 
 export function ApplicationCard({ app, index }: { app: WorkspaceApplication; index: number }) {
-  const navigate = useNavigate()
-
-  const open = () => {
-    if (!app.enabled) return
-    if (app.route) navigate(app.route)
-    else if (app.externalUrl) window.open(app.externalUrl, '_blank', 'noopener,noreferrer')
-  }
+  const { favouriteIds, launch, toggleFavourite } = useAppLauncher()
+  const favourite = favouriteIds.includes(app.id)
 
   const onPointerMove = (event: React.PointerEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -17,32 +12,13 @@ export function ApplicationCard({ app, index }: { app: WorkspaceApplication; ind
     event.currentTarget.style.setProperty('--card-y', `${event.clientY - rect.top}px`)
   }
 
-  return (
-    <article
-      className={`app-card app-card-${index + 1} ${app.enabled ? '' : 'is-disabled'}`}
-      style={{ '--app-accent': app.accent } as React.CSSProperties}
-      onPointerMove={onPointerMove}
-      onClick={open}
-      onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') open() }}
-      role={app.enabled ? 'link' : undefined}
-      tabIndex={app.enabled ? 0 : -1}
-      aria-disabled={!app.enabled}
-    >
-      <div className="app-card-glow" />
-      <div className="app-card-top">
-        <span className="app-glyph">{app.glyph}</span>
-        <span className="status-tag"><i />{app.status}</span>
-      </div>
-      <div className="app-card-body">
-        <span className="mono-label">0{index + 1} / Application</span>
-        <h3>{app.name}</h3>
-        <p>{app.description}</p>
-      </div>
-      <div className="app-card-footer">
-        <span>{app.metric}</span>
-        <span className="round-arrow"><Icon name="arrow" size={17} /></span>
-      </div>
-    </article>
-  )
+  return <article className={`app-card ${app.enabled ? '' : 'is-disabled'}`} style={{ '--app-accent': app.accent } as React.CSSProperties} onPointerMove={onPointerMove}>
+    <div className="app-card-glow"/>
+    <button disabled={!app.enabled} className={`app-favourite app-card-favourite ${favourite ? 'is-favourite' : ''}`} onClick={() => toggleFavourite(app.id)} aria-label={`${favourite ? 'Remove' : 'Add'} ${app.name} ${favourite ? 'from' : 'to'} favourites`}><Icon name="star" size={16} filled={favourite}/></button>
+    <button className="app-card-launch" disabled={!app.enabled} onClick={() => launch(app)}>
+      <div className="app-card-top"><span className="app-glyph">{app.glyph}</span><span className="status-tag"><i/>{app.status}</span></div>
+      <div className="app-card-body"><span className="mono-label">{String(index + 1).padStart(2, '0')} / Application</span><h3>{app.name}</h3><p>{app.description}</p></div>
+      <div className="app-card-footer"><span>{app.metric}</span><span className="round-arrow"><Icon name={app.externalUrl ? 'external' : 'arrow'} size={17}/></span></div>
+    </button>
+  </article>
 }
-

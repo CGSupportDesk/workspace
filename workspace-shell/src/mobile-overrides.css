@@ -1,0 +1,22 @@
+.app-tile > .app-favourite { right: 7px; }
+
+@media (max-width: 620px) {
+  .app-tile > .app-favourite { right: 6px; }
+  .vault-sidebar nav a {
+    width: auto;
+    min-width: 68px;
+    height: 46px;
+    padding: 5px 8px !important;
+    gap: 3px;
+    flex-direction: column;
+    font-size: 7px !important;
+  }
+  .vault-sidebar nav a svg { width: 17px; }
+  .vault-header-actions { flex-direction: row; flex-wrap: wrap; }
+  .vault-header-actions button {
+    width: auto;
+    min-width: 44px;
+    padding: 0 12px;
+    font-size: 8px;
+  }
+}

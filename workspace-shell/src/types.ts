@@ -1,5 +1,7 @@
 export type WorkspaceRole = 'admin' | 'member'
 
+export type ApplicationCategory = 'workspace' | 'operations' | 'websites'
+
 export type WorkspaceUser = {
   id: string
   username: string
@@ -14,6 +16,8 @@ export type WorkspaceApplication = {
   id: string
   name: string
   description: string
+  category: ApplicationCategory
+  kind: 'native' | 'tool' | 'website'
   route?: string
   externalUrl?: string
   folderPath?: string
@@ -21,6 +25,7 @@ export type WorkspaceApplication = {
   status: string
   metric: string
   enabled: boolean
+  featured?: boolean
   glyph: string
 }
 

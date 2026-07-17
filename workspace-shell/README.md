@@ -1,6 +1,8 @@
 # Closing Gap Workspace
 
-A central React/TypeScript workspace with a Vercel Node.js API, Neon Postgres persistence, a native team To-Do board, private Vercel Blob document storage, user administration, an integrated Vault, and environment-driven launch links for the other Closing Gap applications.
+A mobile-first React/TypeScript operations hub with a Vercel Node.js API, Neon Postgres persistence, a native team To-Do board, private Vercel Blob document storage, user administration, an integrated Vault, and a searchable directory for Closing Gap tools, brands, and websites.
+
+Workspace includes persistent per-device application favourites and recents, a mobile bottom navigation, an installable PWA shell, and connected launch entries for Prospector, CW Watch, MitDir, Crestfield, and the Closing Gap website. External applications open in a separate browser tab so their independent authentication and security policies continue to work correctly.
 
 ## Requirements
 
@@ -73,7 +75,7 @@ The project is linked to the Vercel project `workspace`. Neon and private Blob i
 npx vercel deploy --prod
 ```
 
-Frontend launch URLs are build-time values and require a new deployment after they change. The Vercel rewrite in `vercel.json` preserves the frontend's existing `/api/index.php` calls while routing them to `api/index.ts`; all other non-file routes fall back to the Vite SPA.
+Frontend launch URLs are build-time values and require a new deployment after they change. The application registry is organized into Workspace, business operations, and brands/websites groups in `src/config/apps.ts`. The Vercel rewrite in `vercel.json` preserves the frontend's existing `/api/index.php` calls while routing them to `api/index.ts`; all other non-file routes fall back to the Vite SPA.
 
 The former PHP/SQLite Workspace API is retained in `legacy-php-api` as a rollback reference only. It is not routed or deployed by the current Vercel configuration.
 

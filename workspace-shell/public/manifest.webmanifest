@@ -1,0 +1,18 @@
+{
+  "name": "Closing Gap Workspace",
+  "short_name": "Workspace",
+  "description": "Every part of the Closing Gap business, connected.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f1efe8",
+  "theme_color": "#f1efe8",
+  "icons": [
+    {
+      "src": "/workspace-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
