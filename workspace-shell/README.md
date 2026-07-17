@@ -1,6 +1,6 @@
 # Closing Gap Workspace
 
-A central React/TypeScript workspace with a Vercel Node.js API, Neon Postgres persistence, private Vercel Blob document storage, user administration, an integrated Vault, and environment-driven launch links for the existing Closing Gap applications.
+A central React/TypeScript workspace with a Vercel Node.js API, Neon Postgres persistence, a native team To-Do board, private Vercel Blob document storage, user administration, an integrated Vault, and environment-driven launch links for the other Closing Gap applications.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ npx vercel env pull .env.local
 npx vercel dev
 ```
 
-`vercel dev` runs the Vite frontend and the TypeScript function together, including the compatibility route at `/api/index.php`. The standalone To-Do, CG Studio, and Finora applications retain their own runtimes, databases, and authentication.
+`vercel dev` runs the Vite frontend and the TypeScript function together, including the compatibility route at `/api/index.php`. To-Do is available at `/todo` and shares Workspace authentication and Neon persistence. The original PHP/SQLite To-Do folder remains unchanged as the interface reference. CG Studio and Finora retain their own runtimes, databases, and authentication.
 
 ## Validation
 
@@ -54,7 +54,7 @@ $env:WORKSPACE_ADMIN_PASSWORD='your-password'
 npm run smoke:production
 ```
 
-The smoke test covers authentication, CSRF protection, folder and document writes, private Blob preview/copy/version/delete, search, user administration, cleanup, logout, and session revocation.
+The smoke test covers authentication, CSRF protection, To-Do CRUD/checklists/comments/recurrence, folder and document writes, private Blob preview/copy/version/delete, search, user administration, cleanup, logout, and session revocation.
 
 ## Deployment
 
@@ -78,4 +78,4 @@ The former PHP/SQLite Workspace API is retained in `legacy-php-api` as a rollbac
 - Active-account, role, visibility, and ownership checks on every protected operation.
 - Allowlisted upload types, filename sanitization, size limits, and private Blob objects.
 - Vault metadata and version history in Neon; document bytes are streamed through authenticated API routes and are never exposed through public Blob URLs.
-
+- Team tasks, checklists, comments, recurring schedules, and To-Do activity are stored in Neon and are accessible only through authenticated Workspace API calls.

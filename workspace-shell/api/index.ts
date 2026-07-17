@@ -9,6 +9,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { copyPrivateBlob, deletePrivateBlobs, getPrivateBlob, uploadPrivateBlob } from '../server/blob.js'
 import { ensureDatabase, logActivity, query, strongPassword } from '../server/db.js'
 import { clearSessionCookie, createSession, readSession, setSessionCookie, type SessionPayload } from '../server/security.js'
+import { handleTodo } from '../server/todo.js'
 
 type Role = 'admin' | 'member'
 type Visibility = 'private' | 'workspace' | 'restricted'
@@ -194,6 +195,11 @@ async function handle(req: VercelRequest, res: VercelResponse) {
     await adminUser(req)
     const users = await query<UserRow>('SELECT * FROM workspace_users ORDER BY active DESC, LOWER(username)')
     return json(res, 200, { users: users.map(publicUser) })
+  }
+
+  if (action.startsWith('todo.')) {
+    const auth = await currentUser(req)
+    return handleTodo(action, req, res, auth!, fail)
   }
 
   if (action === 'users.create') {

@@ -48,7 +48,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
     }))
     const actions: Command[] = [
       { id: 'upload', label: 'Upload a document', meta: 'Vault', icon: 'upload', action: () => navigate('/vault?upload=1') },
-      { id: 'task', label: 'Create a task', meta: 'To-Do', icon: 'grid', action: () => workspaceApplications[0].externalUrl && window.open(workspaceApplications[0].externalUrl, '_blank') },
+      { id: 'task', label: 'Create a task', meta: 'To-Do', icon: 'grid', action: () => navigate('/todo') },
       { id: 'invoice', label: 'Create an invoice', meta: 'Finora', icon: 'grid', action: () => workspaceApplications[2].externalUrl && window.open(workspaceApplications[2].externalUrl, '_blank') },
       { id: 'lead', label: 'Add a lead', meta: 'Growth Engine · coming soon', icon: 'grid', action: () => undefined },
       { id: 'candidate', label: 'Add a candidate', meta: 'TruHyre · coming soon', icon: 'users', action: () => undefined },

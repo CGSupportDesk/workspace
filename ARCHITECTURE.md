@@ -2,15 +2,15 @@
 
 ## Existing applications
 
-The source folder contains three independent legacy applications. They remain separate from the Workspace deployment and keep their own databases and authentication.
+The source folder contains three legacy applications. Their source remains preserved; To-Do now also has a Workspace-native production implementation.
 
 | Application | Folder | Runtime | Local development URL |
 | --- | --- | --- | --- |
-| To-Do | `todo (2)` | Static HTML/CSS/JavaScript with PHP + SQLite API | `http://localhost:8081` |
+| To-Do reference | `todo (2)` | Static HTML/CSS/JavaScript with PHP + SQLite API | `http://localhost:8081` |
 | CG Studio | `cgstudio` | Pre-built Vite/React static site | `http://localhost:8082` |
 | Finora | `Finora` | Static HTML/CSS/JavaScript with PHP + SQLite API | `http://localhost:8083` |
 
-Workspace opens configured production URLs for these tools; it does not imply cross-application SSO.
+Workspace opens configured production URLs for CG Studio and Finora; it does not imply cross-application SSO for those tools.
 
 ## Workspace application
 
@@ -21,6 +21,8 @@ Workspace opens configured production URLs for these tools; it does not imply cr
 - `server/db.ts` applies the idempotent Neon Postgres schema and owns users, session versions, Vault metadata, document versions, activity, and login attempts.
 - `server/security.ts` signs and validates first-party session cookies and CSRF state.
 - `server/blob.ts` writes, copies, reads, and deletes private Vercel Blob objects.
+- `server/todo.ts` implements the replicated To-Do API against Neon, including tasks, recurring schedules, checklists, comments, and activity.
+- `public/todo/index.html` preserves the existing board/calendar/focus/dashboard interface while replacing its PHP calls with authenticated Workspace API actions. It is presented inside the protected `/todo` route.
 - `vercel.json` maps legacy-compatible `/api/index.php` calls to the Node function and provides SPA fallback routing.
 
 ## Request and data flow
@@ -28,7 +30,7 @@ Workspace opens configured production URLs for these tools; it does not imply cr
 1. The browser calls `/api/index.php?action=...` on the same origin.
 2. Vercel rewrites the request to the TypeScript function.
 3. The function validates the signed session, current Postgres session version, CSRF token, role, and resource ownership.
-4. Users and Vault metadata are read or written in Neon.
+4. Users, tasks, comments, checklists, activity, and Vault metadata are read or written in Neon.
 5. Document bytes are written to a private Blob store. Downloads and previews stream back through the authenticated function, so the Blob URL is not exposed to the browser.
 
 ## Deployment

@@ -14,6 +14,7 @@ let folderId = ''
 let documentId = ''
 let copyId = ''
 let testUserId = ''
+const todoTaskIds = []
 
 async function request(action, { method = 'GET', json, form, expected = 200 } = {}) {
   const headers = { Accept: 'application/json' }
@@ -41,6 +42,11 @@ async function removeDocument(id) {
   await request('vault.document.delete', { method: 'POST', json: { id } }).catch(() => undefined)
 }
 
+async function removeTodoTask(id) {
+  if (!id) return
+  await request('todo.delete', { method: 'POST', json: { id } }).catch(() => undefined)
+}
+
 try {
   const login = await request('auth.login', { method: 'POST', json: { identity, password } })
   const setCookie = login.response.headers.get('set-cookie') || ''
@@ -54,6 +60,27 @@ try {
   console.log('ok auth.status')
 
   const marker = Date.now().toString(36)
+  const today = new Date().toISOString().slice(0, 10)
+  const todo = await request('todo.create', { method: 'POST', expected: 201, json: {
+    title: `Smoke task ${marker}`, assigned_to: identity, status: 'today', due_date: today,
+    priority: 'urgent', is_recurring: true, recurrence_pattern: 'daily', labels: ['deployment'],
+  } })
+  todoTaskIds.push(todo.payload.task.id)
+  const todoDetail = await request(`todo.detail&id=${todo.payload.task.id}`)
+  if (todoDetail.payload.task.title !== `Smoke task ${marker}`) throw new Error('Created task details did not match.')
+  const checklist = await request('todo.checklist.add', { method: 'POST', expected: 201, json: { task_id: todo.payload.task.id, text: 'Verify Neon task persistence' } })
+  await request('todo.checklist.toggle', { method: 'POST', json: { id: checklist.payload.id, checked: true } })
+  await request('todo.comment.add', { method: 'POST', expected: 201, json: { task_id: todo.payload.task.id, body: 'Automated production verification' } })
+  await request('todo.update', { method: 'POST', json: { id: todo.payload.task.id, status: 'completed' } })
+  const todoList = await request('todo.list')
+  const recurringChild = todoList.payload.tasks.find((task) => task.recurrence_parent_id === todo.payload.task.id)
+  if (!recurringChild) throw new Error('Completing a recurring task did not create its next instance.')
+  todoTaskIds.push(recurringChild.id)
+  await request('todo.activity')
+  for (const id of [...todoTaskIds].reverse()) await removeTodoTask(id)
+  todoTaskIds.length = 0
+  console.log('ok To-Do CRUD + checklist + comments + recurrence + cleanup')
+
   const folder = await request('vault.folder.create', { method: 'POST', expected: 201, json: { name: `Smoke ${marker}`, visibility: 'private' } })
   folderId = folder.payload.folder.id
   console.log('ok vault.folder.create')
@@ -112,6 +139,7 @@ try {
   console.log('Production smoke test passed.')
 } finally {
   if (cookie && csrf) {
+    for (const id of [...todoTaskIds].reverse()) await removeTodoTask(id)
     await removeDocument(copyId)
     await removeDocument(documentId)
     if (folderId) await request('vault.folder.delete', { method: 'POST', json: { id: folderId } }).catch(() => undefined)

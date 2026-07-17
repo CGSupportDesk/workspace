@@ -5,12 +5,12 @@ export const workspaceApplications: WorkspaceApplication[] = [
     id: 'todo',
     name: 'To-Do',
     description: 'Daily priorities, task ownership and team execution.',
-    externalUrl: import.meta.env.VITE_TODO_URL || undefined,
+    route: '/todo',
     folderPath: 'todo (2)',
     accent: '#246bfe',
-    status: 'Live',
-    metric: '9 tasks due today',
-    enabled: Boolean(import.meta.env.VITE_TODO_URL),
+    status: 'Workspace native',
+    metric: 'Board, calendar, focus & reporting',
+    enabled: true,
     glyph: 'TD',
   },
   {
@@ -71,4 +71,3 @@ export const workspaceApplications: WorkspaceApplication[] = [
     glyph: 'GE',
   },
 ]
-

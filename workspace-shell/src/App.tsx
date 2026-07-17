@@ -8,6 +8,7 @@ import { LoginPage } from './pages/LoginPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { SettingsPage } from './pages/SettingsPage'
 import { TeamPage } from './pages/TeamPage'
+import { TodoPage } from './pages/TodoPage'
 import { VaultPage } from './pages/VaultPage'
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="team" element={<TeamPage/>}/>
         <Route path="profile" element={<ProfilePage/>}/>
         <Route path="settings" element={<SettingsPage/>}/>
+        <Route path="todo" element={<TodoPage/>}/>
         <Route path="vault" element={<Navigate to="/vault/documents" replace/>}/>
         <Route path="vault/:section" element={<VaultPage/>}/>
       </Route>
@@ -28,4 +30,3 @@ export default function App() {
     <Route path="*" element={<Navigate to="/" replace/>}/>
   </Routes>
 }
-

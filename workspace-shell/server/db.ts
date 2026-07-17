@@ -89,11 +89,56 @@ async function migrate() {
     success BOOLEAN NOT NULL DEFAULT FALSE,
     attempted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )`
+  await sql`CREATE TABLE IF NOT EXISTS todo_tasks (
+    id BIGSERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    assigned_to TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'backlog' CHECK (status IN ('backlog','today','in_progress','completed')),
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    due_date DATE NULL,
+    description TEXT NULL,
+    priority TEXT NOT NULL DEFAULT 'medium' CHECK (priority IN ('urgent','high','medium','low')),
+    time_estimate TEXT NULL,
+    labels JSONB NOT NULL DEFAULT '[]'::jsonb,
+    is_recurring BOOLEAN NOT NULL DEFAULT FALSE,
+    recurrence_pattern TEXT NULL CHECK (recurrence_pattern IS NULL OR recurrence_pattern IN ('daily','weekly','monthly')),
+    recurrence_parent_id BIGINT NULL REFERENCES todo_tasks(id) ON DELETE SET NULL,
+    created_by UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
+    updated_by UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS todo_checklist_items (
+    id BIGSERIAL PRIMARY KEY,
+    task_id BIGINT NOT NULL REFERENCES todo_tasks(id) ON DELETE CASCADE,
+    text TEXT NOT NULL,
+    checked BOOLEAN NOT NULL DEFAULT FALSE,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS todo_comments (
+    id BIGSERIAL PRIMARY KEY,
+    task_id BIGINT NOT NULL REFERENCES todo_tasks(id) ON DELETE CASCADE,
+    author TEXT NOT NULL,
+    body TEXT NOT NULL,
+    user_id UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
+  await sql`CREATE TABLE IF NOT EXISTS todo_activity_logs (
+    id BIGSERIAL PRIMARY KEY,
+    user_id UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
+    user_name TEXT NOT NULL,
+    action TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
   await sql`CREATE INDEX IF NOT EXISTS vault_documents_owner_idx ON vault_documents(owner_id)`
   await sql`CREATE INDEX IF NOT EXISTS vault_documents_folder_idx ON vault_documents(folder_id)`
   await sql`CREATE INDEX IF NOT EXISTS vault_documents_updated_idx ON vault_documents(updated_at DESC)`
   await sql`CREATE INDEX IF NOT EXISTS vault_folders_owner_idx ON vault_folders(owner_id)`
   await sql`CREATE INDEX IF NOT EXISTS workspace_activity_created_idx ON workspace_activity(created_at DESC)`
+  await sql`CREATE INDEX IF NOT EXISTS todo_tasks_status_order_idx ON todo_tasks(status,sort_order)`
+  await sql`CREATE INDEX IF NOT EXISTS todo_tasks_due_idx ON todo_tasks(due_date)`
+  await sql`CREATE INDEX IF NOT EXISTS todo_activity_created_idx ON todo_activity_logs(created_at DESC)`
 
   const admins = await query<{ count: string }>("SELECT COUNT(*)::text count FROM workspace_users WHERE role = 'admin'")
   if (Number(admins[0]?.count || 0) === 0) {
@@ -122,4 +167,3 @@ export async function logActivity(userId: string, action: string, entityType: st
     [crypto.randomUUID(), userId, action, entityType, entityId, entityName],
   )
 }
-

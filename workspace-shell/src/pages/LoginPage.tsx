@@ -15,7 +15,9 @@ export function LoginPage() {
   const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => setError(''), [identity, password])
-  if (!loading && user) return <Navigate to="/" replace />
+  const queryDestination = new URLSearchParams(location.search).get('next')
+  const safeDestination = queryDestination?.startsWith('/') && !queryDestination.startsWith('//') ? queryDestination : '/'
+  if (!loading && user) return <Navigate to={safeDestination} replace />
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -26,7 +28,7 @@ export function LoginPage() {
     setSubmitting(true)
     try {
       await login(identity.trim(), password)
-      const destination = (location.state as { from?: string } | null)?.from || '/'
+      const destination = (location.state as { from?: string } | null)?.from || safeDestination
       navigate(destination, { replace: true })
     } catch (reason) {
       setError(reason instanceof ApiError ? reason.message : 'Unable to sign in. Try again.')
@@ -77,4 +79,3 @@ export function LoginPage() {
     </main>
   )
 }
-
