@@ -74,6 +74,18 @@ async function migrate() {
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     UNIQUE(document_id, version)
   )`
+  await sql`CREATE TABLE IF NOT EXISTS vault_credentials (
+    id UUID PRIMARY KEY,
+    service_name TEXT NOT NULL,
+    website_url TEXT NULL,
+    encrypted_username TEXT NOT NULL,
+    encrypted_email TEXT NOT NULL,
+    encrypted_password TEXT NOT NULL,
+    encrypted_notes TEXT NOT NULL,
+    owner_id UUID NOT NULL REFERENCES workspace_users(id) ON DELETE RESTRICT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`
   await sql`CREATE TABLE IF NOT EXISTS workspace_activity (
     id UUID PRIMARY KEY,
     actor_id UUID NULL REFERENCES workspace_users(id) ON DELETE SET NULL,
@@ -135,6 +147,7 @@ async function migrate() {
   await sql`CREATE INDEX IF NOT EXISTS vault_documents_folder_idx ON vault_documents(folder_id)`
   await sql`CREATE INDEX IF NOT EXISTS vault_documents_updated_idx ON vault_documents(updated_at DESC)`
   await sql`CREATE INDEX IF NOT EXISTS vault_folders_owner_idx ON vault_folders(owner_id)`
+  await sql`CREATE INDEX IF NOT EXISTS vault_credentials_updated_idx ON vault_credentials(updated_at DESC)`
   await sql`CREATE INDEX IF NOT EXISTS workspace_activity_created_idx ON workspace_activity(created_at DESC)`
   await sql`CREATE INDEX IF NOT EXISTS todo_tasks_status_order_idx ON todo_tasks(status,sort_order)`
   await sql`CREATE INDEX IF NOT EXISTS todo_tasks_due_idx ON todo_tasks(due_date)`

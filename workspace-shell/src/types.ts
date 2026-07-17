@@ -73,3 +73,16 @@ export type VaultVersion = {
   createdAt: string
 }
 
+export type VaultCredential = {
+  id: string
+  serviceName: string
+  websiteUrl: string
+  loginUsername: string
+  loginEmail: string
+  hasPassword: boolean
+  hasNotes: boolean
+  ownerId: string
+  ownerName: string
+  createdAt: string
+  updatedAt: string
+}

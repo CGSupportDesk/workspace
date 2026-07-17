@@ -4,4 +4,3 @@
 .env.production.local
 .deployment-secrets
 
-.env*

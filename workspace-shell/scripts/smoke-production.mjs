@@ -14,6 +14,7 @@ let folderId = ''
 let documentId = ''
 let copyId = ''
 let testUserId = ''
+let credentialId = ''
 const todoTaskIds = []
 
 async function request(action, { method = 'GET', json, form, expected = 200 } = {}) {
@@ -60,6 +61,17 @@ try {
   console.log('ok auth.status')
 
   const marker = Date.now().toString(36)
+  const credential = await request('vault.credentials.create', { method: 'POST', expected: 201, json: { serviceName: `Smoke credential ${marker}`, websiteUrl: 'https://example.invalid/', loginUsername: `smoke-${marker}`, loginEmail: `smoke-${marker}@example.invalid`, password: 'Credential-Smoke-42', notes: 'Temporary encrypted verification record' } })
+  credentialId = credential.payload.credential.id
+  const credentialList = await request(`vault.credentials.list&q=${encodeURIComponent(marker)}`)
+  const listedCredential = credentialList.payload.credentials.find((item) => item.id === credentialId)
+  if (!listedCredential || 'password' in listedCredential) throw new Error('Credential list response was missing or exposed a password.')
+  const revealedCredential = await request('vault.credentials.reveal', { method: 'POST', json: { id: credentialId, accountPassword: password } })
+  if (revealedCredential.payload.secret.password !== 'Credential-Smoke-42') throw new Error('Encrypted credential did not decrypt correctly.')
+  await request('vault.credentials.update', { method: 'POST', json: { id: credentialId, serviceName: `Smoke credential ${marker} updated`, loginUsername: `smoke-${marker}`, loginEmail: `smoke-${marker}@example.invalid`, websiteUrl: 'https://example.invalid/' } })
+  await request('vault.credentials.delete', { method: 'POST', json: { id: credentialId } }); credentialId = ''
+  console.log('ok encrypted credential create + list redaction + re-auth reveal + update + delete')
+
   const today = new Date().toISOString().slice(0, 10)
   const todo = await request('todo.create', { method: 'POST', expected: 201, json: {
     title: `Smoke task ${marker}`, assigned_to: identity, status: 'today', due_date: today,
@@ -139,6 +151,7 @@ try {
   console.log('Production smoke test passed.')
 } finally {
   if (cookie && csrf) {
+    if (credentialId) await request('vault.credentials.delete', { method: 'POST', json: { id: credentialId } }).catch(() => undefined)
     for (const id of [...todoTaskIds].reverse()) await removeTodoTask(id)
     await removeDocument(copyId)
     await removeDocument(documentId)

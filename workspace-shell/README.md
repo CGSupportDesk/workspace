@@ -21,6 +21,7 @@ Important server variables:
 - `DATABASE_URL`: pooled Neon connection string.
 - `BLOB_READ_WRITE_TOKEN`: token for a Blob store configured with private access.
 - `WORKSPACE_SESSION_SECRET`: random value of at least 32 characters used to sign session cookies.
+- `WORKSPACE_VAULT_ENCRYPTION_KEY`: base64-encoded 32-byte key used for authenticated encryption of stored credentials. Back it up securely; losing it makes the encrypted records unrecoverable.
 - `WORKSPACE_ADMIN_*`: one-time administrator bootstrap values.
 - `WORKSPACE_MAX_UPLOAD_MB`: upload limit; defaults to 20.
 
@@ -87,3 +88,4 @@ The former PHP/SQLite Workspace API is retained in `legacy-php-api` as a rollbac
 - Allowlisted upload types, filename sanitization, size limits, and private Blob objects.
 - Vault metadata and version history in Neon; document bytes are streamed through authenticated API routes and are never exposed through public Blob URLs.
 - Team tasks, checklists, comments, recurring schedules, and To-Do activity are stored in Neon and are accessible only through authenticated Workspace API calls.
+- Tool credentials are administrator-only. Usernames, emails, passwords, and secure notes use AES-256-GCM application-level encryption; passwords are omitted from lists and require Workspace-password re-authentication before a time-limited reveal.

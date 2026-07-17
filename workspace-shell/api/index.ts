@@ -10,6 +10,7 @@ import { copyPrivateBlob, deletePrivateBlobs, getPrivateBlob, uploadPrivateBlob 
 import { ensureDatabase, logActivity, query, strongPassword } from '../server/db.js'
 import { clearSessionCookie, createSession, readSession, setSessionCookie, type SessionPayload } from '../server/security.js'
 import { handleTodo } from '../server/todo.js'
+import { decryptCredential, encryptCredential } from '../server/credential-crypto.js'
 
 type Role = 'admin' | 'member'
 type Visibility = 'private' | 'workspace' | 'restricted'
@@ -51,6 +52,19 @@ type FolderRow = {
   created_at: string | Date
   updated_at: string | Date
 }
+type CredentialRow = {
+  id: string
+  service_name: string
+  website_url: string | null
+  encrypted_username: string
+  encrypted_email: string
+  encrypted_password: string
+  encrypted_notes: string
+  owner_id: string
+  owner_name?: string
+  created_at: string | Date
+  updated_at: string | Date
+}
 
 class HttpError extends Error {
   constructor(public status: number, message: string) { super(message) }
@@ -64,6 +78,9 @@ function json(res: VercelResponse, status: number, payload: unknown) { return re
 function publicUser(row: UserRow) { return { id: row.id, username: row.username, email: row.email, role: row.role, active: Boolean(row.active), createdAt: iso(row.created_at), updatedAt: iso(row.updated_at) } }
 function publicDocument(row: DocumentRow) { return { id: row.id, name: row.name, fileType: row.file_type, fileSize: Number(row.file_size), folderId: row.folder_id, category: row.category, ownerId: row.owner_id, ownerName: row.owner_name || '', visibility: row.visibility, favourite: Boolean(row.favourite), version: Number(row.version), createdAt: iso(row.created_at), updatedAt: iso(row.updated_at) } }
 function publicFolder(row: FolderRow) { return { id: row.id, name: row.name, parentId: row.parent_id, ownerId: row.owner_id, ownerName: row.owner_name || '', visibility: row.visibility, favourite: Boolean(row.favourite), createdAt: iso(row.created_at), updatedAt: iso(row.updated_at) } }
+function credentialText(value: unknown, max: number) { return [...String(value ?? '')].map(character => { const code=character.charCodeAt(0);return code<32||code===127?' ':character }).join('').trim().slice(0,max) }
+function publicCredential(row: CredentialRow) { return { id:row.id,serviceName:row.service_name,websiteUrl:row.website_url||'',loginUsername:decryptCredential(row.encrypted_username,`${row.id}:username`),loginEmail:decryptCredential(row.encrypted_email,`${row.id}:email`),hasPassword:true,hasNotes:Boolean(decryptCredential(row.encrypted_notes,`${row.id}:notes`)),ownerId:row.owner_id,ownerName:row.owner_name||'',createdAt:iso(row.created_at),updatedAt:iso(row.updated_at) } }
+function credentialUrl(value: unknown) { const raw=credentialText(value,500);if(!raw)return null;try{const parsed=new URL(raw);if(parsed.protocol!=='https:'&&parsed.protocol!=='http:')fail(422,'Website URL must use HTTP or HTTPS.');return parsed.toString()}catch(error){if(error instanceof HttpError)throw error;fail(422,'Enter a valid website URL.')} }
 
 function cleanName(value: string, max = 140) {
   return value.replace(/[\x00-\x1f\x7f]/g, '').replace(/\\/g, '/').split('/').pop()!.replace(/[^\p{L}\p{N} ._()[\]-]+/gu, '-').replace(/^[ .-]+|[ .-]+$/g, '').slice(0, max)
@@ -247,6 +264,22 @@ async function handle(req: VercelRequest, res: VercelResponse) {
   if (action === 'profile.password') {
     const auth=await currentUser(req);mutation(req,auth!.session);const input=await body(req);const current=String(input.current||'');const password=String(input.password||'');if(!(await compare(current,auth!.user.password_hash)))fail(401,'Your current password is incorrect.');if(!strongPassword(password))fail(422,'Password must be at least 10 characters and include upper, lower and a number.')
     const version=Number(auth!.user.session_version)+1;await query('UPDATE workspace_users SET password_hash=$1,session_version=$2,updated_at=NOW() WHERE id=$3',[await hash(password,12),version,auth!.user.id]);const created=createSession(auth!.user.id,version);setSessionCookie(res,created.token);return json(res,200,{success:true,csrfToken:created.payload.csrf})
+  }
+
+  if(action==='vault.credentials.list'){
+    await adminUser(req);const q=param(req,'q').trim().toLowerCase();const rows=await query<CredentialRow>("SELECT c.*,u.username owner_name FROM vault_credentials c JOIN workspace_users u ON u.id=c.owner_id ORDER BY c.updated_at DESC");const credentials=rows.map(publicCredential).filter(item=>!q||[item.serviceName,item.websiteUrl,item.loginUsername,item.loginEmail].some(value=>value.toLowerCase().includes(q)));return json(res,200,{credentials})
+  }
+  if(action==='vault.credentials.create'){
+    const auth=await adminUser(req);mutation(req,auth.session);const input=await body(req);const id=randomUUID();const serviceName=credentialText(input.serviceName,100);const websiteUrl=credentialUrl(input.websiteUrl);const loginUsername=credentialText(input.loginUsername,320);const loginEmail=credentialText(input.loginEmail,320);const password=String(input.password||'');const notes=credentialText(input.notes,5000);if(!serviceName)fail(422,'Service name is required.');if(!loginUsername&&!loginEmail)fail(422,'Add a username or email.');if(!password||password.length>2000)fail(422,'A password is required and must be under 2,000 characters.');await query('INSERT INTO vault_credentials (id,service_name,website_url,encrypted_username,encrypted_email,encrypted_password,encrypted_notes,owner_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',[id,serviceName,websiteUrl,encryptCredential(loginUsername,`${id}:username`),encryptCredential(loginEmail,`${id}:email`),encryptCredential(password,`${id}:password`),encryptCredential(notes,`${id}:notes`),auth.user.id]);await logActivity(auth.user.id,'created credential','credential',id,serviceName);return json(res,201,{credential:{id}})
+  }
+  if(action==='vault.credentials.update'){
+    const auth=await adminUser(req);mutation(req,auth.session);const input=await body(req);const id=String(input.id||'');const record=(await query<CredentialRow>('SELECT * FROM vault_credentials WHERE id=$1',[id]))[0];if(!record)fail(404,'Credential not found.');const serviceName='serviceName'in input?credentialText(input.serviceName,100):record.service_name;const websiteUrl='websiteUrl'in input?credentialUrl(input.websiteUrl):record.website_url;const loginUsername='loginUsername'in input?credentialText(input.loginUsername,320):decryptCredential(record.encrypted_username,`${id}:username`);const loginEmail='loginEmail'in input?credentialText(input.loginEmail,320):decryptCredential(record.encrypted_email,`${id}:email`);const password=input.password?String(input.password):null;const notes='notes'in input?credentialText(input.notes,5000):null;if(!serviceName)fail(422,'Service name is required.');if(!loginUsername&&!loginEmail)fail(422,'Add a username or email.');if(password&&password.length>2000)fail(422,'Password must be under 2,000 characters.');await query('UPDATE vault_credentials SET service_name=$1,website_url=$2,encrypted_username=$3,encrypted_email=$4,encrypted_password=$5,encrypted_notes=$6,updated_at=NOW() WHERE id=$7',[serviceName,websiteUrl,encryptCredential(loginUsername,`${id}:username`),encryptCredential(loginEmail,`${id}:email`),password?encryptCredential(password,`${id}:password`):record.encrypted_password,notes!==null?encryptCredential(notes,`${id}:notes`):record.encrypted_notes,id]);await logActivity(auth.user.id,'updated credential','credential',id,serviceName);return json(res,200,{success:true})
+  }
+  if(action==='vault.credentials.reveal'){
+    const auth=await adminUser(req);mutation(req,auth.session);const input=await body(req);if(!(await compare(String(input.accountPassword||''),auth.user.password_hash)))fail(401,'Workspace password is incorrect.');const id=String(input.id||'');const record=(await query<CredentialRow>('SELECT * FROM vault_credentials WHERE id=$1',[id]))[0];if(!record)fail(404,'Credential not found.');await logActivity(auth.user.id,'revealed credential','credential',id,record.service_name);return json(res,200,{secret:{password:decryptCredential(record.encrypted_password,`${id}:password`),notes:decryptCredential(record.encrypted_notes,`${id}:notes`)}})
+  }
+  if(action==='vault.credentials.delete'){
+    const auth=await adminUser(req);mutation(req,auth.session);const id=String((await body(req)).id||'');const rows=await query<{service_name:string}>('DELETE FROM vault_credentials WHERE id=$1 RETURNING service_name',[id]);if(!rows.length)fail(404,'Credential not found.');await logActivity(auth.user.id,'deleted credential','credential',null,rows[0].service_name);return json(res,200,{success:true})
   }
 
   if (action === 'vault.list') {

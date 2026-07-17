@@ -21,6 +21,7 @@ Workspace opens configured production URLs for CG Studio and Finora; it does not
 - `server/db.ts` applies the idempotent Neon Postgres schema and owns users, session versions, Vault metadata, document versions, activity, and login attempts.
 - `server/security.ts` signs and validates first-party session cookies and CSRF state.
 - `server/blob.ts` writes, copies, reads, and deletes private Vercel Blob objects.
+- `server/credential-crypto.ts` provides authenticated AES-256-GCM encryption for administrator-managed tool credentials; its key exists only in Vercel's sensitive environment configuration and the ignored recovery file.
 - `server/todo.ts` implements the replicated To-Do API against Neon, including tasks, recurring schedules, checklists, comments, and activity.
 - `public/todo/index.html` preserves the existing board/calendar/focus/dashboard interface while replacing its PHP calls with authenticated Workspace API actions. It is presented inside the protected `/todo` route.
 - `vercel.json` maps legacy-compatible `/api/index.php` calls to the Node function and provides SPA fallback routing.
