@@ -37,6 +37,14 @@ npx vercel dev
 
 `vercel dev` runs the Vite frontend and the TypeScript function together, including the compatibility route at `/api/index.php`. To-Do is available at `/todo` and shares Workspace authentication and Neon persistence. The original PHP/SQLite To-Do folder remains unchanged as the interface reference. CG Studio and Finora retain their own runtimes, databases, and authentication.
 
+The legacy To-Do records have been imported into Neon. A guarded migration utility remains available for disaster recovery; it refuses to run against a non-empty task table unless the operator explicitly acknowledges possible ID conflicts:
+
+```powershell
+npm run migrate:todo
+```
+
+The utility reads `todo (2)/api/database/tasks.db`, requires Python's standard `sqlite3` module, and uses `DATABASE_URL` for the destination.
+
 ## Validation
 
 ```powershell

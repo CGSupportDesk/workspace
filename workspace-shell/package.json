@@ -8,6 +8,7 @@
     "build": "tsc -p tsconfig.server.json && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "migrate:todo": "node scripts/migrate-legacy-todo.mjs",
     "smoke:production": "node scripts/smoke-production.mjs"
   },
   "dependencies": {
