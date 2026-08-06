@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { Icon } from '../components/Icon'
 import { CredentialsPanel } from '../components/CredentialsPanel'
+import { AssetsPanel } from '../components/AssetsPanel'
 import { useAuth } from '../context/AuthContext'
 import { api, ApiError, formatBytes, formatRelativeDate } from '../lib/api'
 import type { VaultActivity, VaultDocument, VaultFolder, VaultVersion, VaultVisibility } from '../types'
@@ -116,19 +117,19 @@ export function VaultPage() {
   const visibleFolders = useMemo(() => data.folders, [data.folders])
   const visibleDocuments = useMemo(() => data.documents, [data.documents])
 
-  if (section === 'credentials') return <section className="vault-page">
+  if (section === 'credentials' || section === 'assets') return <section className="vault-page">
     <aside className="vault-sidebar">
       <div className="vault-title"><span className="vault-mark"><Icon name="vault" size={19}/></span><div><strong>Vault</strong><small>Knowledge system</small></div></div>
       <nav>
         <span className="sidebar-label">Library</span>
         <NavLink to="/vault/documents"><Icon name="file"/>Documents</NavLink><NavLink to="/vault/folders"><Icon name="folder"/>Folders</NavLink><NavLink to="/vault/favourites"><Icon name="star"/>Favourites</NavLink><NavLink to="/vault/recent"><Icon name="clock"/>Recent</NavLink><NavLink to="/vault/shared"><Icon name="share"/>Shared</NavLink>
         <span className="sidebar-label">Manage</span>
-        {user?.role === 'admin' && <NavLink to="/vault/credentials"><Icon name="vault"/>Credentials</NavLink>}
+        {user?.role === 'admin' && <><NavLink to="/vault/assets"><Icon name="asset"/>Assets</NavLink><NavLink to="/vault/credentials"><Icon name="vault"/>Credentials</NavLink></>}
         <NavLink to="/vault/users"><Icon name="users"/>People & access</NavLink><NavLink to="/vault/settings"><Icon name="settings"/>Vault settings</NavLink>
       </nav>
-      <div className="storage-meter"><div><span>Credential security</span><strong>ADMIN</strong></div><i><b style={{width:'100%'}}/></i><small>Encrypted application fields</small></div>
+      <div className="storage-meter"><div><span>{section === 'assets' ? 'Asset control' : 'Credential security'}</span><strong>ADMIN</strong></div><i><b style={{width:'100%'}}/></i><small>{section === 'assets' ? 'Company property register' : 'Encrypted application fields'}</small></div>
     </aside>
-    <CredentialsPanel role={user?.role || 'member'}/>
+    {section === 'assets' ? <AssetsPanel role={user?.role || 'member'}/> : <CredentialsPanel role={user?.role || 'member'}/>}
   </section>
 
   return <section className="vault-page">
@@ -142,7 +143,7 @@ export function VaultPage() {
         <NavLink to="/vault/recent"><Icon name="clock"/>Recent</NavLink>
         <NavLink to="/vault/shared"><Icon name="share"/>Shared</NavLink>
         <span className="sidebar-label">Manage</span>
-        {user?.role === 'admin' && <NavLink to="/vault/credentials"><Icon name="vault"/>Credentials</NavLink>}
+        {user?.role === 'admin' && <><NavLink to="/vault/assets"><Icon name="asset"/>Assets</NavLink><NavLink to="/vault/credentials"><Icon name="vault"/>Credentials</NavLink></>}
         <NavLink to="/vault/users"><Icon name="users"/>People & access</NavLink>
         <NavLink to="/vault/settings"><Icon name="settings"/>Vault settings</NavLink>
       </nav>

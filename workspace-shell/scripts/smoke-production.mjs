@@ -15,6 +15,7 @@ let documentId = ''
 let copyId = ''
 let testUserId = ''
 let credentialId = ''
+let assetId = ''
 const todoTaskIds = []
 
 async function request(action, { method = 'GET', json, form, expected = 200 } = {}) {
@@ -71,6 +72,20 @@ try {
   await request('vault.credentials.update', { method: 'POST', json: { id: credentialId, serviceName: `Smoke credential ${marker} updated`, loginUsername: `smoke-${marker}`, loginEmail: `smoke-${marker}@example.invalid`, websiteUrl: 'https://example.invalid/' } })
   await request('vault.credentials.delete', { method: 'POST', json: { id: credentialId } }); credentialId = ''
   console.log('ok encrypted credential create + list redaction + re-auth reveal + update + delete')
+
+  const seededAssets = await request('vault.assets.list')
+  if (seededAssets.payload.assets.length < 7 || !seededAssets.payload.assets.some((asset) => asset.identifier === '+917824839704')) throw new Error('The seeded SIM asset register is incomplete.')
+  const smokePhone = `+91999${String(Date.now()).slice(-7)}`
+  const asset = await request('vault.assets.create', { method: 'POST', expected: 201, json: { assetType:'sim',name:`Smoke SIM ${marker}`,identifier:smokePhone,registeredOwner:'Workspace Test',currentOwner:'Automation',provider:'Airtel',status:'active',monthlyCost:499,renewalDay:12,location:'Test bench',notes:'Temporary asset verification record' } })
+  assetId = asset.payload.asset.id
+  const assetList = await request(`vault.assets.list&q=${encodeURIComponent(marker)}`)
+  const listedAsset = assetList.payload.assets.find((item) => item.id === assetId)
+  if (!listedAsset || listedAsset.monthlyCost !== 499 || listedAsset.renewalDay !== 12) throw new Error('Created asset was not returned with its cost and renewal metadata.')
+  await request('vault.assets.update', { method: 'POST', json: { ...listedAsset, id:assetId, status:'spare', monthlyCost:599 } })
+  const updatedAssets = await request(`vault.assets.list&q=${encodeURIComponent(marker)}`)
+  if (updatedAssets.payload.assets.find((item) => item.id === assetId)?.status !== 'spare') throw new Error('Asset update was not persisted.')
+  await request('vault.assets.delete', { method: 'POST', json: { id:assetId } });assetId=''
+  console.log('ok Vault asset seed + create + list + update + delete')
 
   const today = new Date().toISOString().slice(0, 10)
   const todo = await request('todo.create', { method: 'POST', expected: 201, json: {
@@ -152,6 +167,7 @@ try {
 } finally {
   if (cookie && csrf) {
     if (credentialId) await request('vault.credentials.delete', { method: 'POST', json: { id: credentialId } }).catch(() => undefined)
+    if (assetId) await request('vault.assets.delete', { method: 'POST', json: { id: assetId } }).catch(() => undefined)
     for (const id of [...todoTaskIds].reverse()) await removeTodoTask(id)
     await removeDocument(copyId)
     await removeDocument(documentId)

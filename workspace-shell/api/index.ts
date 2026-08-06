@@ -65,6 +65,24 @@ type CredentialRow = {
   created_at: string | Date
   updated_at: string | Date
 }
+type AssetRow = {
+  id: string
+  asset_type: string
+  name: string
+  identifier: string
+  registered_owner: string
+  current_owner: string
+  provider: string
+  status: string
+  monthly_cost: string | number
+  renewal_day: number | null
+  location: string
+  notes: string
+  created_by: string | null
+  created_by_name?: string
+  created_at: string | Date
+  updated_at: string | Date
+}
 
 class HttpError extends Error {
   constructor(public status: number, message: string) { super(message) }
@@ -81,6 +99,12 @@ function publicFolder(row: FolderRow) { return { id: row.id, name: row.name, par
 function credentialText(value: unknown, max: number) { return [...String(value ?? '')].map(character => { const code=character.charCodeAt(0);return code<32||code===127?' ':character }).join('').trim().slice(0,max) }
 function publicCredential(row: CredentialRow) { return { id:row.id,serviceName:row.service_name,websiteUrl:row.website_url||'',loginUsername:decryptCredential(row.encrypted_username,`${row.id}:username`),loginEmail:decryptCredential(row.encrypted_email,`${row.id}:email`),hasPassword:true,hasNotes:Boolean(decryptCredential(row.encrypted_notes,`${row.id}:notes`)),ownerId:row.owner_id,ownerName:row.owner_name||'',createdAt:iso(row.created_at),updatedAt:iso(row.updated_at) } }
 function credentialUrl(value: unknown) { const raw=credentialText(value,500);if(!raw)return null;try{const parsed=new URL(raw);if(parsed.protocol!=='https:'&&parsed.protocol!=='http:')fail(422,'Website URL must use HTTP or HTTPS.');return parsed.toString()}catch(error){if(error instanceof HttpError)throw error;fail(422,'Enter a valid website URL.')} }
+function publicAsset(row: AssetRow) { return { id:row.id,assetType:row.asset_type,name:row.name,identifier:row.identifier,registeredOwner:row.registered_owner,currentOwner:row.current_owner,provider:row.provider,status:row.status,monthlyCost:Number(row.monthly_cost),renewalDay:row.renewal_day===null?null:Number(row.renewal_day),location:row.location,notes:row.notes,createdByName:row.created_by_name||'',createdAt:iso(row.created_at),updatedAt:iso(row.updated_at) } }
+function assetType(value: unknown) { const result=String(value||'').toLowerCase();if(['sim','phone','laptop','tablet','accessory','software','other'].includes(result))return result;return fail(422,'Choose a valid asset type.') }
+function assetStatus(value: unknown) { const result=String(value||'').toLowerCase();if(['active','spare','inactive','repair','lost','retired'].includes(result))return result;return fail(422,'Choose a valid asset status.') }
+function assetIdentifier(value: unknown, type: string) { const raw=credentialText(value,160);if(type!=='sim')return raw;let normalized=raw.replace(/[^+\d]/g,'');if(/^91\d{10}$/.test(normalized))normalized=`+${normalized}`;if(/^\d{10}$/.test(normalized))normalized=`+91${normalized}`;if(!/^\+[1-9]\d{7,14}$/.test(normalized))fail(422,'Enter the SIM number with a valid country code.');return normalized }
+function assetCost(value: unknown) { const result=Number(value||0);if(!Number.isFinite(result)||result<0||result>100000000)fail(422,'Enter a valid monthly cost.');return Math.round(result*100)/100 }
+function assetRenewalDay(value: unknown) { if(value===''||value===null||value===undefined)return null;const result=Number(value);if(!Number.isInteger(result)||result<1||result>31)fail(422,'Recharge day must be between 1 and 31.');return result }
 
 function cleanName(value: string, max = 140) {
   return value.replace(/[\x00-\x1f\x7f]/g, '').replace(/\\/g, '/').split('/').pop()!.replace(/[^\p{L}\p{N} ._()[\]-]+/gu, '-').replace(/^[ .-]+|[ .-]+$/g, '').slice(0, max)
@@ -266,6 +290,29 @@ async function handle(req: VercelRequest, res: VercelResponse) {
     const version=Number(auth!.user.session_version)+1;await query('UPDATE workspace_users SET password_hash=$1,session_version=$2,updated_at=NOW() WHERE id=$3',[await hash(password,12),version,auth!.user.id]);const created=createSession(auth!.user.id,version);setSessionCookie(res,created.token);return json(res,200,{success:true,csrfToken:created.payload.csrf})
   }
 
+  if(action==='vault.assets.list'){
+    await adminUser(req)
+    const q=param(req,'q').trim().toLowerCase();const type=param(req,'type');const status=param(req,'status')
+    const rows=await query<AssetRow>("SELECT a.*,COALESCE(u.username,'Deleted user') created_by_name FROM vault_assets a LEFT JOIN workspace_users u ON u.id=a.created_by ORDER BY CASE a.status WHEN 'active' THEN 1 WHEN 'spare' THEN 2 WHEN 'repair' THEN 3 WHEN 'inactive' THEN 4 ELSE 5 END,LOWER(a.name)")
+    const assets=rows.map(publicAsset).filter(item=>(!type||item.assetType===type)&&(!status||item.status===status)&&(!q||[item.name,item.identifier,item.registeredOwner,item.currentOwner,item.provider,item.location,item.notes].some(value=>value.toLowerCase().includes(q))))
+    return json(res,200,{assets})
+  }
+  if(action==='vault.assets.create'){
+    const auth=await adminUser(req);mutation(req,auth.session);const input=await body(req);const id=randomUUID();const type=assetType(input.assetType);const name=credentialText(input.name,100);const identifier=assetIdentifier(input.identifier,type);const registeredOwner=credentialText(input.registeredOwner,120);const currentOwner=credentialText(input.currentOwner,120);const provider=credentialText(input.provider,80);const status=assetStatus(input.status);const monthlyCost=assetCost(input.monthlyCost);const renewalDay=assetRenewalDay(input.renewalDay);const location=credentialText(input.location,160);const notes=credentialText(input.notes,5000)
+    if(!name)fail(422,'Asset name is required.');if(!identifier)fail(422,'Phone number, serial number or identifier is required.')
+    try{await query('INSERT INTO vault_assets (id,asset_type,name,identifier,registered_owner,current_owner,provider,status,monthly_cost,renewal_day,location,notes,created_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)',[id,type,name,identifier,registeredOwner,currentOwner,provider,status,monthlyCost,renewalDay,location,notes,auth.user.id])}catch(error){if(String(error).toLowerCase().includes('unique'))fail(409,'That asset identifier is already registered.');throw error}
+    await logActivity(auth.user.id,'created asset','asset',id,name);return json(res,201,{asset:{id}})
+  }
+  if(action==='vault.assets.update'){
+    const auth=await adminUser(req);mutation(req,auth.session);const input=await body(req);const id=String(input.id||'');const record=(await query<AssetRow>('SELECT * FROM vault_assets WHERE id=$1',[id]))[0];if(!record)fail(404,'Asset not found.');const type=assetType(input.assetType);const name=credentialText(input.name,100);const identifier=assetIdentifier(input.identifier,type);const registeredOwner=credentialText(input.registeredOwner,120);const currentOwner=credentialText(input.currentOwner,120);const provider=credentialText(input.provider,80);const status=assetStatus(input.status);const monthlyCost=assetCost(input.monthlyCost);const renewalDay=assetRenewalDay(input.renewalDay);const location=credentialText(input.location,160);const notes=credentialText(input.notes,5000)
+    if(!name)fail(422,'Asset name is required.');if(!identifier)fail(422,'Phone number, serial number or identifier is required.')
+    try{await query('UPDATE vault_assets SET asset_type=$1,name=$2,identifier=$3,registered_owner=$4,current_owner=$5,provider=$6,status=$7,monthly_cost=$8,renewal_day=$9,location=$10,notes=$11,updated_at=NOW() WHERE id=$12',[type,name,identifier,registeredOwner,currentOwner,provider,status,monthlyCost,renewalDay,location,notes,id])}catch(error){if(String(error).toLowerCase().includes('unique'))fail(409,'That asset identifier is already registered.');throw error}
+    await logActivity(auth.user.id,'updated asset','asset',id,name);return json(res,200,{success:true})
+  }
+  if(action==='vault.assets.delete'){
+    const auth=await adminUser(req);mutation(req,auth.session);const id=String((await body(req)).id||'');const rows=await query<{name:string}>('DELETE FROM vault_assets WHERE id=$1 RETURNING name',[id]);if(!rows.length)fail(404,'Asset not found.');await logActivity(auth.user.id,'deleted asset','asset',null,rows[0].name);return json(res,200,{success:true})
+  }
+
   if(action==='vault.credentials.list'){
     await adminUser(req);const q=param(req,'q').trim().toLowerCase();const rows=await query<CredentialRow>("SELECT c.*,u.username owner_name FROM vault_credentials c JOIN workspace_users u ON u.id=c.owner_id ORDER BY c.updated_at DESC");const credentials=rows.map(publicCredential).filter(item=>!q||[item.serviceName,item.websiteUrl,item.loginUsername,item.loginEmail].some(value=>value.toLowerCase().includes(q)));return json(res,200,{credentials})
   }
@@ -339,7 +386,7 @@ async function handle(req: VercelRequest, res: VercelResponse) {
   }
 
   if(action==='search'){
-    const auth=await currentUser(req);const q=param(req,'q').trim();if(!q)return json(res,200,{documents:[],folders:[],users:[]});const needle=`%${q}%`;const admin=auth!.user.role==='admin';const documents=await query<DocumentRow>("SELECT d.*,u.username owner_name FROM vault_documents d JOIN workspace_users u ON u.id=d.owner_id WHERE d.name ILIKE $1 AND (d.visibility='workspace' OR d.owner_id=$2 OR $3=TRUE) ORDER BY d.updated_at DESC LIMIT 8",[needle,auth!.user.id,admin]);const folders=await query<FolderRow>("SELECT f.*,u.username owner_name FROM vault_folders f JOIN workspace_users u ON u.id=f.owner_id WHERE f.name ILIKE $1 AND (f.visibility='workspace' OR f.owner_id=$2 OR $3=TRUE) ORDER BY f.updated_at DESC LIMIT 6",[needle,auth!.user.id,admin]);const users=admin?await query<UserRow>('SELECT * FROM workspace_users WHERE username ILIKE $1 OR email ILIKE $1 ORDER BY LOWER(username) LIMIT 6',[needle]):[];return json(res,200,{documents:documents.map(publicDocument),folders:folders.map(publicFolder),users:users.map(publicUser)})
+    const auth=await currentUser(req);const q=param(req,'q').trim();if(!q)return json(res,200,{documents:[],folders:[],users:[],assets:[]});const needle=`%${q}%`;const admin=auth!.user.role==='admin';const documents=await query<DocumentRow>("SELECT d.*,u.username owner_name FROM vault_documents d JOIN workspace_users u ON u.id=d.owner_id WHERE d.name ILIKE $1 AND (d.visibility='workspace' OR d.owner_id=$2 OR $3=TRUE) ORDER BY d.updated_at DESC LIMIT 8",[needle,auth!.user.id,admin]);const folders=await query<FolderRow>("SELECT f.*,u.username owner_name FROM vault_folders f JOIN workspace_users u ON u.id=f.owner_id WHERE f.name ILIKE $1 AND (f.visibility='workspace' OR f.owner_id=$2 OR $3=TRUE) ORDER BY f.updated_at DESC LIMIT 6",[needle,auth!.user.id,admin]);const users=admin?await query<UserRow>('SELECT * FROM workspace_users WHERE username ILIKE $1 OR email ILIKE $1 ORDER BY LOWER(username) LIMIT 6',[needle]):[];const assets=admin?await query<AssetRow>("SELECT a.*,COALESCE(u.username,'Deleted user') created_by_name FROM vault_assets a LEFT JOIN workspace_users u ON u.id=a.created_by WHERE a.name ILIKE $1 OR a.identifier ILIKE $1 OR a.current_owner ILIKE $1 OR a.provider ILIKE $1 ORDER BY a.updated_at DESC LIMIT 6",[needle]):[];return json(res,200,{documents:documents.map(publicDocument),folders:folders.map(publicFolder),users:users.map(publicUser),assets:assets.map(publicAsset)})
   }
 
   fail(404,'Unknown API action.')

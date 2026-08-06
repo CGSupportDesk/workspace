@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { workspaceApplications } from '../config/apps'
 import { useAppLauncher } from '../hooks/useAppLauncher'
 import { api } from '../lib/api'
-import type { VaultDocument, VaultFolder, WorkspaceUser } from '../types'
+import type { VaultAsset, VaultDocument, VaultFolder, WorkspaceUser } from '../types'
 import { Icon } from './Icon'
 import type { IconName } from './Icon'
 
-type SearchData = { documents: VaultDocument[]; folders: VaultFolder[]; users: WorkspaceUser[] }
+type SearchData = { documents: VaultDocument[]; folders: VaultFolder[]; users: WorkspaceUser[]; assets: VaultAsset[] }
 type Command = { id: string; label: string; meta: string; icon: IconName; action: () => void }
 
 export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -16,7 +16,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
-  const [remote, setRemote] = useState<SearchData>({ documents: [], folders: [], users: [] })
+  const [remote, setRemote] = useState<SearchData>({ documents: [], folders: [], users: [], assets: [] })
 
   useEffect(() => {
     if (!open) return
@@ -44,6 +44,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       ...remote.documents.map((document) => ({ id: `doc-${document.id}`, label: document.name, meta: `Document · ${document.category}`, icon: 'file' as const, action: () => navigate(`/vault?document=${document.id}`) })),
       ...remote.folders.map((folder) => ({ id: `folder-${folder.id}`, label: folder.name, meta: 'Vault folder', icon: 'folder' as const, action: () => navigate(`/vault/folders?folder=${folder.id}`) })),
       ...remote.users.map((person) => ({ id: `user-${person.id}`, label: person.username, meta: person.email, icon: 'users' as const, action: () => navigate('/team') })),
+      ...remote.assets.map((asset) => ({ id: `asset-${asset.id}`, label: asset.name, meta: `${asset.identifier}${asset.currentOwner ? ` · ${asset.currentOwner}` : ''}`, icon: 'asset' as const, action: () => navigate('/vault/assets') })),
     ]
     const all = [...appCommands, ...actions, ...dynamic]
     if (!query) return all

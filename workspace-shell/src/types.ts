@@ -91,3 +91,24 @@ export type VaultCredential = {
   createdAt: string
   updatedAt: string
 }
+
+export type VaultAssetType = 'sim' | 'phone' | 'laptop' | 'tablet' | 'accessory' | 'software' | 'other'
+export type VaultAssetStatus = 'active' | 'spare' | 'inactive' | 'repair' | 'lost' | 'retired'
+
+export type VaultAsset = {
+  id: string
+  assetType: VaultAssetType
+  name: string
+  identifier: string
+  registeredOwner: string
+  currentOwner: string
+  provider: string
+  status: VaultAssetStatus
+  monthlyCost: number
+  renewalDay: number | null
+  location: string
+  notes: string
+  createdByName: string
+  createdAt: string
+  updatedAt: string
+}

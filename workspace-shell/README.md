@@ -2,7 +2,7 @@
 
 A mobile-first React/TypeScript operations hub with a Vercel Node.js API, Neon Postgres persistence, a native team To-Do board, private Vercel Blob document storage, user administration, an integrated Vault, and a searchable directory for Closing Gap tools, brands, and websites.
 
-Workspace includes persistent per-device application favourites and recents, a mobile bottom navigation, an installable PWA shell, and connected launch entries for Prospector, CW Watch, MitDir, Crestfield, and the Closing Gap website. External applications open in a separate browser tab so their independent authentication and security policies continue to work correctly.
+Workspace includes persistent per-device application favourites and recents, a mobile bottom navigation, an installable PWA shell, and connected launch entries for Prospector, CW Watch, MitDir, Crestfield, and the Closing Gap website. External applications open in a separate browser tab so their independent authentication and security policies continue to work correctly. Vault also includes an administrator-only Asset Register for SIMs, devices, software and other company property, including assignment, registration, provider, status, recurring cost and renewal metadata.
 
 ## Requirements
 
@@ -91,3 +91,4 @@ The former PHP/SQLite Workspace API is retained in `legacy-php-api` as a rollbac
 - Vault metadata and version history in Neon; document bytes are streamed through authenticated API routes and are never exposed through public Blob URLs.
 - Team tasks, checklists, comments, recurring schedules, and To-Do activity are stored in Neon and are accessible only through authenticated Workspace API calls.
 - Tool credentials are administrator-only. Usernames, emails, passwords, and secure notes use AES-256-GCM application-level encryption; passwords are omitted from lists and require Workspace-password re-authentication before a time-limited reveal.
+- Company assets are maintained in an administrator-only register. Asset creation, changes, and deletion are recorded in Workspace activity, while unique identifiers prevent duplicate SIMs or serial numbers.
